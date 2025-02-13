@@ -1,0 +1,42 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+ 
+
+    <div id="main">
+        <div id="canvas">
+            <div id="formbody">
+            <h1>Edit Service</h1>
+            <form action="/edit_service/{{service.id}}/{{name}}" method="POST">
+                <div class="mb-3">
+                  <label for="service_name" class="form-label">service_name</label>
+                  <input type="name" class="form-control" id="example_service_name" name="service_name" value={{service.service_name}}>
+              </div>
+                
+                <div class="mb-3">
+                    <label for="exampleDescription" class="form-label"> description</label>
+                    <input type="address" class="form-control" name="description" id="exampleInputPassword1" value={{service.description}}>
+                  </div>
+                  <div class="mb-3">
+                    <label for="base_price" class="form-label">base_price</label>
+                    <input type="price" class="form-control" name="base_price" id="exampleInputName" value={{service.base_price}}>
+                </div>
+                
+                <div style="text-align: center;">
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <a href="/admin/{{name}}" type="button" class="btn btn-primary">Cancel</a>
+                 
+              </div>
+              
+               
+
+                </button>
+               
+               
+                
+              </form>
+  
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}

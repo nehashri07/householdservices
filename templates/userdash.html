@@ -1,0 +1,75 @@
+{%extends "user_layout.html"%}
+{%block content%}
+<div class="container text-center mt-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+  
+      <!-- Services Card -->
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">Services</h5>
+            <p class="card-text">The services available</p>
+            {% if service %}
+            
+              {% for service in service %}
+                <div class="card" style="width: 18rem; margin: 0 auto;">
+                  
+                  <div class="card-body">
+                    
+                    <h6 class="card-title">Name: {{ service.service_name }}</h6>
+                    <h6 class="card-title">Description: {{ service.description }}</h6>
+                    <p class="card-text">Base price: {{ service.base_price }}</p>
+                    <a href="/book_service/{{service.id}}/{{name}}" class="btn btn-primary">Book service</a>
+                    
+                  
+                    
+                  </div>
+                </div>
+              {% endfor %}
+              
+            {% else %}
+              <h3>No services available </h3>
+            {% endif %}
+            
+            
+          </div>
+        </div>
+      </div>
+      <!-- Services Card -->
+     
+              <div class="card" style="width: 22rem;">
+                  <div class="card-body">
+                      <h5 class="card-title">Service History</h5>
+                      <p class="card-text">Services booked</p>
+                      {% if service_request %}
+                   
+              {% for request in service_request %}
+             
+                              <div class="card" style="width: 18rem; margin: 0 auto;">
+                                  <div class="card-body">
+                                    {{request.user_id}}
+                                      <h6 class="card-title">Date: {{ request.date }}</h6>  
+                                      <h6 class="card-title">Status: {{ request.status }}</h6> 
+                                      <p class="card-text">Pro_id: {{ request.pro_id }}</p>
+                                      <a href="/close_service/{{name}}" class="btn btn-primary">close Service</a> 
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      {% else %}
+                          <p>No service requests found.</p> <!-- Optionally, you can add a message if no service requests exist -->
+                      {% endif %}
+                  
+                    </div>
+
+              </div>
+          </div>
+          
+            
+            
+          </div>
+        </div>
+      </div>
+{%endblock%}
+
+</body>
+</html>

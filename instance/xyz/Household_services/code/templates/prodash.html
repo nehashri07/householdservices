@@ -1,0 +1,91 @@
+{% extends "pro_layout.html" %}
+{% block content %}
+<div class="container text-center mt-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <!-- Pending Services -->
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 22rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Services</h5>
+                    <p class="card-text">The services available</p>
+                    {% if service_request %}
+                        {% for request in service_request %}
+                            {% if request.status == "Pending" %}
+                                <div class="card my-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Service: {{ request.service_name }}</h5>
+                                        <p class="card-text">Requested by: {{ request.user_id }}</p>
+                                        <p class="card-text">Date: {{ request.date }}</p>
+                                        <p class="card-text">Status: {{ request.status }}</p>
+                                        <a href="/accept_request/{{ request.id }}/{{ name }}" class="btn btn-success">Accept</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <h3>No pending services</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Approved Services -->
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 22rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Approved Services</h5>
+                    <p class="card-text">The services you have approved</p>
+                    {% if service_request %}
+                        {% for request in service_request %}
+                            {% if request.status == "Approved" and request.pro_id == name %}
+                                <div class="card my-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Service: {{ request.service_name }}</h5>
+                                        <p class="card-text">Requested by: {{ request.user_id }}</p>
+                                        <p class="card-text">Date: {{ request.date }}</p>
+                                        <p class="card-text">Status: {{ request.status }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <h3>No approved services</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Services -->
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 22rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Completed Services</h5>
+                    <p class="card-text">Services you have completed</p>
+                    {% if service_request %}
+                        {% for request in service_request %}
+                            {% if request.pro_id == name and request.status == "Completed" %}
+                                <div class="card my-2" style="width: 18rem; margin: 0 auto;">
+                                    <div class="card-body">
+                                        <h6>Service ID: {{ request.s_id }}</h6>
+                                        <p>User ID: {{ request.user_id }}</p>
+                                        <p>Date: {{ request.date }}</p>
+                                        <p>Status: {{ request.status }}</p>
+                                        <p>Pro ID: {{ request.pro_id }}</p>
+                                        <p>Rating: {{ request.rating }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <h3>No completed services</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+</body>
+</html>

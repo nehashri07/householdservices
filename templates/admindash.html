@@ -1,0 +1,123 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<div class="container text-center mt-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+
+    <!-- Services Card -->
+    <div class="col d-flex justify-content-center">
+      <div class="card" style="width: 22rem;">
+        <div class="card-body">
+          <h5 class="card-title">Services</h5>
+          <p class="card-text">The services available</p>
+          {% if service %}
+          
+            {% for service in service %}
+              <div class="card" style="width: 18rem; margin: 0 auto;">
+                
+                <div class="card-body">
+                  <h6 class="card-title">ID: {{ service.id }}</h6>
+                  <h6 class="card-title">Name: {{ service.service_name }}</h6>
+                  <p class="card-text">Base price: {{ service.base_price }}</p>
+                  <a href="/edit_service/{{service.id}}/{{name}}" class="btn btn-primary">Edit</a>
+                  <form action="/delete_service/{{ service.id }}/{{name}}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                
+                  
+                </div>
+              </div>
+            {% endfor %}
+            
+          {% else %}
+            <h3>No services available </h3>
+          {% endif %}
+          
+          <a href="/add_services/{{name}}" type="button" class="btn btn-warning mt-3">New Service</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professionals  Card -->
+    <div class="col d-flex justify-content-center">
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Professionals </h5>
+          {% if professional %}
+          
+            {% for professional in professional %}
+            
+              <div class="card" style="width: 18rem; margin: 0 auto;">
+                <div class="card-body">
+                  <h6 class="card-title">ID: {{ professional.id }}</h6>
+                  <h6 class="card-title">Name: {{ professional.full_name }}</h6>
+                  <p class="card-text">Experience: {{ professional.experience }}</p>
+                  <p class="card-text">Service name: {{ professional.service_name }}</p>
+                  
+                  <form action="/delete_pro/{{ professional.id }}/{{name}}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                  
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <h3>No professionals available</h3>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+ 
+
+    <!-- Service Requests Card -->
+    <div class="col d-flex justify-content-center">
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Service Requests</h5>
+          {% if service_request %}
+            {% for request in service_request %}
+              <div class="card" style="width: 18rem; margin: 0 auto;">
+                <div class="card-body">
+                  <h6 class="card-title">ID: {{ request.id }}</h6>
+                  <h6 class="card-title">Assigned Pro_id: {{ request.pro_id }}</h6>
+                  <h6 class="card-title">User id: {{ request.user_id }}</h6>
+                  <p class="card-text"> DT: {{ request.date }}</p>
+                  <p class="card-text"> Rating: {{ request.rating }}</p>
+                  <p class="card-text">Status (R/A/C): {{ request.status }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <h3>No service requests available</h3>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+ <!-- Customers Requests Card -->
+ <div class="col d-flex justify-content-center">
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <h5 class="card-title">Users</h5>
+      {% if user %}
+        {% for user in user %}
+          <div class="card" style="width: 18rem; margin: 0 auto;">
+            <div class="card-body">
+              <h6 class="card-title">ID: {{ user.id }}</h6>
+              <h6 class="card-title">User name: {{ user.full_name }}</h6>
+              <p class="card-text">Location: {{ user.address }}</p>
+              <form action="/delete_usr/{{ user.id }}/{{name}}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h3>No users available</h3>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

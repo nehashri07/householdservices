@@ -1,0 +1,40 @@
+{%extends "pro_layout.html"%}
+{%block content%}
+<div class="container text-center mt-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+  
+      <!-- Services Card -->
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">Services</h5>
+            <p class="card-text">The services available</p>
+            {% if service_request %}
+            
+              {% for request in service_request %}
+                <div class="card" style="width: 18rem; margin: 0 auto;">
+                  
+                  <div class="card-body">
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Service: {{ request.service_name }}</h5>
+                            <p class="card-text">Requested by: {{ request.user_id }}</p>
+                            <p class="card-text">Date: {{ request.date }}</p>
+                            <p class="card-text">Status: {{ request.status }}</p>
+                            <a href="{{ url_for('accept_request', id=request.id) }}" class="btn btn-success">Accept</a>
+                            
+                        </div>
+                    </div>
+                    
+            
+              {% endfor %}
+              
+            {% else %}
+              <h3>No services available </h3>
+            {% endif %}
+
+{%endblock%}
+
+</body>
+</html>

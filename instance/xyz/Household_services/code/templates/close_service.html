@@ -1,0 +1,28 @@
+{% extends "user_layout.html" %}
+{% block content %}
+<div class="center"><h3>Close Service</h3></div>
+<div class="center"><h4>Service name: {{ service.service_name }} </h4></div>
+
+<form action="/close_service/{{ service.id }}/{{ name }}" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="uid" class="form-label">User ID</label>
+            <input type="text" class="form-control" name="uid" id="uid" value="{{ uid }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="sid" class="form-label">Service ID</label>
+            <input type="text" class="form-control" name="sid" id="sid" value="{{ sid }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="number" class="form-control" name="rating" id="rating" min="1" max="5" step="1" placeholder="Enter a rating (1-5)">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/user/{{ name }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+   
